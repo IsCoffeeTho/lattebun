@@ -1,0 +1,20 @@
+{
+	"name": "lattebun",
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"start": "",
+		"wiki": "bunx typedoc"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5",
+		"typedoc": "^0.28.14",
+		"typedoc-github-wiki-theme": "^2.1.0",
+		"typedoc-plugin-markdown": "^4.9.0",
+		"typedoc-plugin-merge-modules": "^7.0.0",
+		"typedoc-plugin-rename-defaults": "^0.7.3"
+	}
+}
