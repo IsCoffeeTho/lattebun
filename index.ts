@@ -1,5 +1,9 @@
+import template from "./src/template";
+import templateFile from "./src/templateFile";
+
 const lattebun = {
-	template: require("./src/template")
+	template,
+	templateFile
 };
 
 export default lattebun;

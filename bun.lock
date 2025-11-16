@@ -5,13 +5,14 @@
       "name": "mocha",
       "devDependencies": {
         "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "toastiebun": "^0.5.0",
         "typedoc": "^0.28.14",
         "typedoc-github-wiki-theme": "^2.1.0",
         "typedoc-plugin-markdown": "^4.9.0",
         "typedoc-plugin-merge-modules": "^7.0.0",
         "typedoc-plugin-rename-defaults": "^0.7.3",
-      },
-      "peerDependencies": {
         "typescript": "^5",
       },
     },
@@ -64,6 +65,8 @@
     "minimatch": ["minimatch@9.0.5", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="],
 
     "punycode.js": ["punycode.js@2.3.1", "", {}, "sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA=="],
+
+    "toastiebun": ["toastiebun@0.5.0", "", { "peerDependencies": { "typedoc": "^0.28.14", "typedoc-github-wiki-theme": "latest", "typedoc-plugin-markdown": "latest", "typedoc-plugin-merge-modules": "latest", "typedoc-plugin-rename-defaults": "latest", "typescript": "^5.9.2" } }, "sha512-Li0Qi5RetoiYlMMhdQWd82BA/VU1907ey7PGLS/S7f9SE1+7KjWBT/YttlquPkkCFgZoWHliYd/iL2jM/34ruQ=="],
 
     "typedoc": ["typedoc@0.28.14", "", { "dependencies": { "@gerrit0/mini-shiki": "^3.12.0", "lunr": "^2.3.9", "markdown-it": "^14.1.0", "minimatch": "^9.0.5", "yaml": "^2.8.1" }, "peerDependencies": { "typescript": "5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x" }, "bin": { "typedoc": "bin/typedoc" } }, "sha512-ftJYPvpVfQvFzpkoSfHLkJybdA/geDJ8BGQt/ZnkkhnBYoYW6lBgPQXu6vqLxO4X75dA55hX8Af847H5KXlEFA=="],
 
