@@ -25,12 +25,12 @@ app.get("/static/*", (req, res) => {
 
 const skeleton = new lattebun.templateFile(`${__dirname}/pages/skeleton.html`);
 
-const landing = await skeleton.bake({
+const landing = skeleton.bake({
 	content: Bun.file(`${__dirname}/pages/landing.html`)
 });
-app.get("/", async (req, res) => {
-	var data = await landing.stream();
-	console.log(data);
+
+app.get("/", (req, res) => {
+	var data = landing.fill({});
 	res.type("html").send(data);
 });
 

@@ -10,12 +10,14 @@
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
-		"toastiebun": "^0.5.0",
 		"typedoc": "^0.28.14",
 		"typedoc-github-wiki-theme": "^2.1.0",
 		"typedoc-plugin-markdown": "^4.9.0",
 		"typedoc-plugin-merge-modules": "^7.0.0",
 		"typedoc-plugin-rename-defaults": "^0.7.3",
-		"typescript": "^5"
+		"typescript": "^5.9.3"
+	},
+	"dependencies": {
+		"toastiebun": "^0.5.0"
 	}
 }
