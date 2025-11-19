@@ -1,14 +1,22 @@
-<html>
+<!doctype html>
+<html lang="en">
 	<head>
-		
+		<link rel="stylesheet" href="/static/index.css" />
 	</head>
 	<body>
-		<div class="header"></div>
-		<div>
-			{{content}}
-			<div class="footer">
-				Example footer
+		<div class="page">
+			<div class="header">
+				<div class="header-left">
+					<a href="/" class="brand">LatteBun</a>
+				</div>
+				<div class="header-center">{{headerLink}}</div>
+				<div class="header-right"></div>
 			</div>
+			<div class="content">{{content}}</div>
+		</div>
+		<div class="footer">
+			<div class="footer-link"><a href="/credits">Attributions</a></div>
+			<div>&copy;<span class="cwyl">cwyl &mdash; 2025</span></div>
 		</div>
 	</body>
 </html>

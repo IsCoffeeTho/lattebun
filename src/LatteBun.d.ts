@@ -33,13 +33,20 @@ export namespace LatteBun {
 	export type templateOptions = {
 		create(): DataStream | Promise<DataStream>;
 	};
+	
+	/**
+	 * 
+	 */
+	export type markdownOptions = {
+		
+	};
 }
 
 export async function convertToDataChunk(data: LatteBun.templateBakeable): Promise<DataChunk> {
-	if (typeof data == "string") {
-		return Uint8Array.from(data.split("").map(c => c.charCodeAt(0)));
-	} else if (data instanceof Blob) {
+	if (data instanceof Blob) {
 		return await data.bytes();
+	} else if (typeof data == "string") {
+		return Uint8Array.from(data.split("").map(c => c.charCodeAt(0)));
 	} else if (data instanceof Uint8Array) {
 		return data;
 	}
@@ -48,7 +55,7 @@ export async function convertToDataChunk(data: LatteBun.templateBakeable): Promi
 
 export async function convertToBakedDataChunk(data: LatteBun.templateBakeable): Promise<DataChunk> {
 	if (data instanceof ReadableStream) {
-		return Uint8Array.from(await data.bytes());
+		return await (await data.blob()).bytes();
 	}
 	return await convertToDataChunk(data);
 }

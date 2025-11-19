@@ -1,9 +1,11 @@
 import template from "./src/template";
 import templateFile from "./src/templateFile";
+import templateString from "./src/templateString";
 
 const lattebun = {
 	template,
-	templateFile
+	templateFile,
+	templateString
 };
 
 export default lattebun;

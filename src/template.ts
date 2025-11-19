@@ -9,14 +9,12 @@ export default class template {
 	bake(fillable: LatteBun.bakeableTemplateDescriptor): template {
 		var baking: Promise<LatteBun.DataChunk> | undefined = convertToBakedDataChunk(this.fill(<LatteBun.templateDescriptor>fillable));
 		var baked: LatteBun.DataChunk;
-		baking.then((v) => {
-			baked = v;
-			baking = undefined;
-		})
 		return new template({
 			create: async () => {
-				while (!baked);
-				console.log(baked);
+				if (baking) {
+					baked = await baking;
+					baking = undefined;
+				}
 				return new ReadableStream<LatteBun.DataChunk>({
 					start: controller => {
 						controller.enqueue(<LatteBun.DataChunk>baked);
@@ -24,7 +22,7 @@ export default class template {
 					},
 				});
 			},
-		})
+		});
 	}
 
 	fill(fillable: LatteBun.templateDescriptor) {
@@ -32,7 +30,9 @@ export default class template {
 		var templateReader: LatteBun.DataStreamReader;
 
 		const startDelim = "{".charCodeAt(0);
+		const checkStartDelim = (v:number, i: number, a:Uint8Array) => v == startDelim && a[i + 1] == startDelim;
 		const endDelim = "}".charCodeAt(0);
+		const checkEndDelim = (v:number, i: number, a:Uint8Array) => v == endDelim && a[i + 1] == endDelim;
 
 		const decoder = new TextDecoder();
 
@@ -49,38 +49,35 @@ export default class template {
 			pull: async controller => {
 				var chunk;
 				while ((chunk = await templateReader.read()) && !chunk.done) {
-					var templateBegin = chunk.value.findIndex((v, i, a) => v == startDelim && a[i + 1] == startDelim);
-					if (templateBegin == -1) {
-						controller.enqueue(chunk.value);
-						continue;
-					}
+					var templateBegin: number = -1;
+					while ((templateBegin = chunk.value.findIndex(checkStartDelim)) > -1) {
+						
+						controller.enqueue(chunk.value.slice(0, templateBegin));
+						chunk.value = chunk.value.slice(templateBegin);
 
-					controller.enqueue(chunk.value.slice(0, templateBegin));
-					chunk.value = chunk.value.slice(templateBegin);
+						var templateEnd = chunk.value.findIndex(checkEndDelim);
 
-					var templateEnd = chunk.value.findIndex((v, i, a) => v == endDelim && a[i + 1] == endDelim);
-
-					var key = decoder.decode(chunk.value.slice(2, templateEnd)).split(".");
-
-					var tree: any = fillable;
-
-					var prevKeys: string[] = [];
-					try {
-						while (key.length > 0) {
-							var keyPart = <string>key.shift();
-							prevKeys.push(keyPart);
-							tree = <LatteBun.bakeableTemplateDescriptor>tree[keyPart];
+						var keyString = decoder.decode(chunk.value.slice(2, templateEnd));
+						var key = keyString.split(".");
+						var tree: any = fillable;
+						try {
+							while (key.length > 0) {
+								var keyPart = <string>key.shift();
+								tree = <LatteBun.bakeableTemplateDescriptor>tree[keyPart];
+							}
+						} catch (err) {
+							// @ts-ignore
+							tree = undefined;
 						}
-					} catch (err) {
-						// @ts-ignore
-						tree = undefined;
+						
+						if (tree == undefined)
+							tree = `{{${keyString}}}`;
+						var value = <LatteBun.templateBakeable>tree;
+
+						controller.enqueue(await convertToBakedDataChunk(value));
+
+						chunk.value = chunk.value.slice(templateEnd + 2);
 					}
-
-					var value = <LatteBun.templateBakeable>tree;
-
-					controller.enqueue(await convertToBakedDataChunk(value));
-
-					chunk.value = chunk.value.slice(templateEnd + 2);
 					controller.enqueue(chunk.value);
 				}
 				templateReader.cancel();

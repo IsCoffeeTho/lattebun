@@ -1,0 +1,163 @@
+@import url("/static/ElmsSans.css");
+
+:root {
+	--brightest: #ebd1b2;
+	--bright: #cbac85;
+	--neutral: #997e5d;
+	--dim: #664f34;
+	--dark: #442f19;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+	margin: 0px;
+	color: var(--dark);
+	background-color: var(--brightest);
+}
+
+@import url("/static/JetBrainsMono.css");
+.cwyl {
+	font-family: "JetBrains Mono", monospace;
+	padding-inline: 0.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Elms Sans", sans-serif;
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--brightest);
+	background-color: var(--dim);
+	font-family: "Elms Sans", sans-serif;
+	padding: 0.5em;
+	position: sticky;
+	top: 0;
+}
+
+.header-left {
+	text-align: left;
+	width: -webkit-fill-available;
+}
+
+.header-center {
+	display: flex;
+	text-align: center;
+}
+
+.header-center > a {
+	padding-inline: 1em;
+	text-decoration: none;
+	color: var(--brightest);
+	border-left: 1px solid var(--brightest);
+}
+
+.header-center > a:first-child {
+	border-left: none;
+}
+
+.header-center > a[current] {
+	font-weight: bold;
+}
+
+.header-right {
+	text-align: right;
+	width: -webkit-fill-available;
+}
+
+.brand {
+	color: var(--brightest);
+	font-family: "Elms Sans", sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 1.5em;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: var(--brightest);
+	background-color: var(--dark);
+	padding-block: 1rem;
+	font-size: 0.8em;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-block: 1rem;
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+code {
+	background-color: var(--dark);
+	color: var(--brightest);
+	padding: 1rem;
+	border-radius: 1rem;
+	font-weight: bold;
+	min-width: 80ch;
+	white-space: preserve;
+	tab-size: 4;
+
+	--comment: #b19d86;
+	--keyword: #d3ad7d;
+	--identifier: #e7c7bb;
+	--string: #889c40;
+	--number: #a6bb58;
+	--function: #f5e875;
+}
+
+span[comment] {
+	color: var(--comment);
+}
+
+span[keyword] {
+	color: var(--keyword);
+}
+
+span[identifier] {
+	color: var(--identifier);
+}
+
+span[string] {
+	color: var(--string);
+}
+
+span[number] {
+	color: var(--number);
+}
+
+span[function] {
+	color: var(--function);
+}
+
+span[tab] {
+	display: inline-block;
+	width: 4ch;
+}
+
+iframe {
+	border: 5px solid var(--dark);
+	background: white;
+	border-radius: 1rem;
+}

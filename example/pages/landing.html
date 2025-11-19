@@ -1,4 +1,36 @@
 <h1>LatteBun</h1>
 <p>
-	LatteBun
+	Welcome to LatteBun, a library that makes writing pages <i>a lot</i> less redundant.<br />
+	To get started
 </p>
+<h2>Basic Example</h2>
+<code><span comment># bash</span>
+<span keyword>$</span> <span identifier>bun</span> <span identifier>install</span> <span identifier>lattebun</span>
+</code><br />
+<code><span comment>// example.ts</span>
+<span keyword>import</span> <span identifier>toastiebun</span> <span keyword>from</span> <span string>"toastiebun"</span>;
+<span keyword>import</span> <span identifier>lattebun</span> <span keyword>from</span> <span string>"lattebun"</span>;
+
+<span keyword>const</span> <span identifier>app</span> = <span keyword>new</span> <span identifier>toastiebun</span>.<span function>server</span>();
+
+<span keyword>const</span> <span identifier>page</span> = <span keyword>new</span> <span identifier>lattebun</span>.<span function>templateFile</span>(<span string>`</span>${<span identifier>__dirname</span>}<span string>/page.html`</span>);
+
+<span identifier>app</span>.<span function>get</span>(<span string>"/"</span>, (<span identifier>req</span>, <span identifier>res</span>) =&gt; {
+	<span identifier>res</span>.<span function>send</span>(<span string>"html"</span>).<span function>send</span>(<span identifier>page</span
+>.<span function>fill</span>({
+		<span string>"name"</span>: <span string>"World"</span>
+	}));
+});
+
+<span identifier>app</span>.<span function>listen</span>(<span string>"::"</span>, <span number>3000</span>);
+</code>
+<br />
+<code><span comment>&lt;!-- page.html --&gt;</span>
+&lt;<span keyword>html</span>&gt;
+	&lt;<span keyword>body</span>&gt;
+		Hello, {{<span identifier>name</span>}}!
+	&lt;/<span keyword>body</span>&gt;
+&lt;/<span keyword>html</span>&gt;
+</code>
+<br />
+<iframe src="/example"></iframe>
