@@ -30,7 +30,7 @@ const genHeaderLinks = (req: any) => {
 		About: "/about",
 		Credit: "/credit"
 	};
-	var retval = [];
+	var retval: string[] = [];
 	for (var page in pages) {
 		var link = <string>pages[page];
 		retval.push(`<a href="${link}" ${req.path == link ? "current" : ""}>${page}</a>`);

@@ -1,6 +1,20 @@
 import { BunFile } from "bun";
 import { LatteBun } from "./LatteBun.d";
 
+/**
+ * A data structure that can read a stream and fill in templatable strings.
+ * 
+ * @example An input stream of
+ * ```ts
+ * // templateString extends template
+ * var example = new templateString("Hello, {{name}}!");
+ * example.fill({ name: "World" });
+ * ```
+ * Has the resulting stream:
+ * ```
+ * Hello, World!
+ * ```
+ */
 export default class template implements LatteBun.Template {
 	#createStream: () => LatteBun.DataStream | PromiseLike<LatteBun.DataStream>;
 	constructor(options: LatteBun.templateOptions) {
