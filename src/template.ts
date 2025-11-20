@@ -1,12 +1,13 @@
-import { convertToBakedDataChunk, type LatteBun } from "./LatteBun.d";
+import { BunFile } from "bun";
+import { LatteBun } from "./LatteBun.d";
 
-export default class template {
+export default class template implements LatteBun.Template {
 	#createStream: () => LatteBun.DataStream | PromiseLike<LatteBun.DataStream>;
 	constructor(options: LatteBun.templateOptions) {
 		this.#createStream = options.create;
 	}
 
-	bake(fillable: LatteBun.bakeableTemplateDescriptor): template {
+	bake(fillable: LatteBun.bakeableTemplateDescriptor): LatteBun.Template {
 		var baking: Promise<LatteBun.DataChunk> | undefined = convertToBakedDataChunk(this.fill(<LatteBun.templateDescriptor>fillable));
 		var baked: LatteBun.DataChunk;
 		return new template({
@@ -25,7 +26,7 @@ export default class template {
 		});
 	}
 
-	fill(fillable: LatteBun.templateDescriptor) {
+	fill(fillable: LatteBun.templateDescriptor): LatteBun.DataStream {
 		var templateStream: LatteBun.DataStream;
 		var templateReader: LatteBun.DataStreamReader;
 
@@ -88,4 +89,21 @@ export default class template {
 			},
 		});
 	}
+}
+
+export async function convertToDataChunk(data: LatteBun.templateBakeable): Promise<LatteBun.DataChunk> {
+	if (data instanceof Blob) {
+		return await data.bytes();
+	} else if (typeof data == "string") {
+		return Uint8Array.from(data.split("").map(c => c.charCodeAt(0)));
+	} else if (data instanceof Uint8Array) {
+		return data;
+	}
+	return Uint8Array.from("undefined".split("").map(c => c.charCodeAt(0)));
+}
+
+export async function convertToBakedDataChunk(data: LatteBun.templateBakeable): Promise<LatteBun.DataChunk> {
+	if (data instanceof ReadableStream)
+		data = <BunFile>(await data.blob());
+	return await convertToDataChunk(data);
 }

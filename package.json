@@ -4,6 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "bun run example/index.ts",
+		"lint": "bunx tsc --noEmit",
 		"wiki": "bunx typedoc"
 	},
 	"devDependencies": {

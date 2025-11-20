@@ -1,4 +1,4 @@
-import { convertToDataChunk, type LatteBun } from "./LatteBun";
+import { type LatteBun } from "./LatteBun";
 import template from "./template";
 
 export default class templateString extends template {

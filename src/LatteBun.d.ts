@@ -1,6 +1,11 @@
 import type { BunFile } from "bun";
 
 export namespace LatteBun {
+	export interface Template {
+		fill(fillins: LatteBun.templateDescriptor): LatteBun.DataStream;
+		bake(fillins: LatteBun.bakeableTemplateDescriptor): LatteBun.Template;
+	}
+
 	export type DataChunk = Uint8Array<ArrayBuffer>;
 	export type DataStream = ReadableStream<DataChunk>;
 	export type DataStreamReader = ReadableStreamDefaultReader<DataChunk>;
@@ -33,29 +38,9 @@ export namespace LatteBun {
 	export type templateOptions = {
 		create(): DataStream | Promise<DataStream>;
 	};
-	
+
 	/**
-	 * 
+	 *
 	 */
-	export type markdownOptions = {
-		
-	};
-}
-
-export async function convertToDataChunk(data: LatteBun.templateBakeable): Promise<DataChunk> {
-	if (data instanceof Blob) {
-		return await data.bytes();
-	} else if (typeof data == "string") {
-		return Uint8Array.from(data.split("").map(c => c.charCodeAt(0)));
-	} else if (data instanceof Uint8Array) {
-		return data;
-	}
-	return Uint8Array.from("undefined".split("").map(c => c.charCodeAt(0)));
-}
-
-export async function convertToBakedDataChunk(data: LatteBun.templateBakeable): Promise<DataChunk> {
-	if (data instanceof ReadableStream) {
-		return await (await data.blob()).bytes();
-	}
-	return await convertToDataChunk(data);
+	export type markdownOptions = {};
 }
