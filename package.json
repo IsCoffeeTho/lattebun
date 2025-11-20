@@ -1,6 +1,7 @@
 {
 	"name": "lattebun",
 	"module": "index.ts",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"start": "bun run example/index.ts",

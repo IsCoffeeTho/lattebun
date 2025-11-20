@@ -94,6 +94,25 @@ h6 {
 	font-size: 0.8em;
 }
 
+.footer-links > a {
+	padding-inline: 0.5em;
+	color: var(--brightest);
+	border-left: 1px solid var(--brightest);
+}
+
+.footer-links > a:first-child {
+	border-left: none;
+}
+
+.page-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-block: 1rem;
+}
+
+
 .content {
 	display: flex;
 	flex-direction: column;
@@ -156,8 +175,18 @@ span[tab] {
 	width: 4ch;
 }
 
+a {
+	color: var(--dim);
+}
+
 iframe {
 	border: 5px solid var(--dark);
 	background: white;
+	color: black;
 	border-radius: 1rem;
+}
+
+p {
+	width: 700px;
+	
 }

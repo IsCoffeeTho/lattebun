@@ -57,6 +57,15 @@ app.get("/about", (req, res) => {
 	res.type("html").send(data);
 });
 
+app.get("/credit", (req, res) => {
+	var data = skeleton.fill({
+		headerLink: genHeaderLinks(req),
+		content: Bun.file(`${__dirname}/pages/credits.html`),
+		announcement: "",
+	});
+	res.type("html").send(data);
+});
+
 const examplePage = new lattebun.templateString(
 `<html>
 	<body>

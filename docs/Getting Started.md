@@ -1,8 +1,4 @@
-LatteBun
-Welcome to LatteBun, a library that makes writing pages a lot less redundant.
-To get started
-
-Basic Example
+Welcome to LatteBun, a library that makes writing pages *a lot* less redundant.
 ```sh
 # bash
 bun install lattebun toastiebun
