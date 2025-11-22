@@ -1,6 +1,11 @@
 import { type LatteBun } from "./LatteBun";
 import template from "./template";
 
+/**
+ * Builds a template from a string, to build specific components for web appliations.
+ * 
+ * @see {@linkcode template}
+ */
 export default class templateString extends template {
 	constructor(str: string) {
 		super({

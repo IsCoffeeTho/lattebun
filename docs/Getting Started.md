@@ -1,7 +1,7 @@
 Welcome to LatteBun, a library that makes writing pages *a lot* less redundant.
 ```sh
 # bash
-bun install lattebun toastiebun
+bun i lattebun toastiebun
 ```
 
 ```ts

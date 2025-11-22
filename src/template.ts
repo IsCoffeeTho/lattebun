@@ -4,15 +4,20 @@ import { LatteBun } from "./LatteBun.d";
 /**
  * A data structure that can read a stream and fill in templatable strings.
  * 
- * @example An input stream of
+ * ---
+ * You can state where 'fill-ins' should appear with the below format:
+ * ```
+ * {{fillin}}!
+ * ```
+ * and describe the value of the fill-in as such:
  * ```ts
- * // templateString extends template
- * var example = new templateString("Hello, {{name}}!");
- * example.fill({ name: "World" });
+ * myTemplate.fill({
+ * 	fillin: "Hello World"
+ * })
  * ```
- * Has the resulting stream:
+ * This particular template will result in:
  * ```
- * Hello, World!
+ * Hello World!
  * ```
  */
 export default class template implements LatteBun.Template {

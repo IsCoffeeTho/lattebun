@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "bun run example/index.ts",
+		"test": "bun test",
 		"lint": "bunx tsc --noEmit",
 		"wiki": "bunx typedoc"
 	},
